@@ -34,4 +34,6 @@ void UART_Init(const UART_config_t *config);
 
 void UART_Transmit_byte(const uint8_t data);
 
+void UART_enable_receive_interrupt(void);
+
 uint8_t UART_Receive_byte(void);

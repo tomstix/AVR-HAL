@@ -101,3 +101,10 @@ uint8_t UART_Receive_byte(void)
     // Get and return received data from buffer
     return UDR0;
 }
+
+void UART_enable_receive_interrupt(void)
+{
+    // Enable the USART Receive Complete interrupt
+    UCSR0B |= _BV(RXCIE0);
+    asm("sei");
+}
