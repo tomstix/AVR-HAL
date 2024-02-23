@@ -30,10 +30,20 @@ typedef struct
     } parity;
 } UART_config_t;
 
-void UART_Init(const UART_config_t *config);
+void UART_init(const UART_config_t *config);
 
-void UART_Transmit_byte(const uint8_t data);
+void UART_transmit_byte(const uint8_t data);
+
+void UART_transmit_string(const char *data);
+
+void UART_transmit_HEX_byte(const uint8_t data);
+
+void UART_transmit_HEX_int(const int data);
+
+void UART_transmit_HEX_long(const long data);
+
+void UART_transmit_DEC_int(const uint32_t data);
 
 void UART_enable_receive_interrupt(void);
 
-uint8_t UART_Receive_byte(void);
+uint8_t UART_receive_byte(void);
