@@ -32,18 +32,18 @@ typedef struct
 
 void UART_init(const UART_config_t *config);
 
-void UART_transmit_byte(const uint8_t data);
+void UART_tx_byte(const uint8_t data);
 
-void UART_transmit_string(const char *data);
+void UART_tx_string(const char *data);
 
-void UART_transmit_HEX_byte(const uint8_t data);
+void UART_tx_HEX_byte(const uint8_t data);
 
-void UART_transmit_HEX_int(const int data);
+void UART_tx_HEX_int(const int data);
 
-void UART_transmit_HEX_long(const long data);
+void UART_tx_HEX_long(const long data);
 
-void UART_transmit_DEC_int(const uint32_t data);
+void UART_tx_DEC_int(const uint32_t data);
 
-void UART_enable_receive_interrupt(void);
+void UART_enable_rx_isr(void);
 
-uint8_t UART_receive_byte(void);
+uint8_t UART_rx_byte(void);
