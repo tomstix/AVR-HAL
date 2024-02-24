@@ -1,8 +1,8 @@
-#include "PWM.h"
+#include "pwm.h"
 
 #include <avr/io.h>
 
-void PWM_Init(const PWM_Pin pin)
+void pwm_init(const PWM_Pin pin)
 {
     // Set the PWM pin as output
     switch (pin)
@@ -47,7 +47,7 @@ void PWM_Init(const PWM_Pin pin)
     }
 }
 
-void PWM_SetDutyCycle(const PWM_Pin pin, const uint8_t duty_cycle)
+void pwm_set_duty(const PWM_Pin pin, const uint8_t duty_cycle)
 {
     switch (pin)
     {

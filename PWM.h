@@ -11,6 +11,6 @@ typedef enum {
     PWM_PIN_11 = 11
 } PWM_Pin;
 
-void PWM_Init(PWM_Pin pin);
+void pwm_init(PWM_Pin pin);
 
-void PWM_SetDutyCycle(const PWM_Pin pin, const uint8_t duty_cycle);
+void pwm_set_duty(const PWM_Pin pin, const uint8_t duty_cycle);

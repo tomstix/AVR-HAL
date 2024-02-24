@@ -1,10 +1,10 @@
-#include "UART.h"
+#include "uart.h"
 
 #include "util.h"
 
 #include <avr/io.h>
 
-void UART_init(const UART_config_t *config)
+void uart_init(const uart_config_t *config)
 {
     // Reset UART registers
     UCSR0A = 0;
@@ -84,7 +84,7 @@ void UART_init(const UART_config_t *config)
     UCSR0B = (1 << RXEN0) | (1 << TXEN0);
 }
 
-void UART_tx_byte(const uint8_t data)
+void uart_tx_byte(const uint8_t data)
 {
     // Wait for empty transmit buffer
     while (!(UCSR0A & (1 << UDRE0)))
@@ -94,49 +94,49 @@ void UART_tx_byte(const uint8_t data)
     UDR0 = data;
 }
 
-void UART_tx_string(const char *data)
+void uart_tx_string(const char *data)
 {
     for (int i = 0; data[i] != '\0'; i++)
     {
-        UART_tx_byte(data[i]);
+        uart_tx_byte(data[i]);
     }
 }
 
-void UART_tx_HEX_byte(const uint8_t data)
+void uart_tx_HEX_byte(const uint8_t data)
 {
     char buffer[2 + sizeof(uint8_t) * 2 + 1];
     buffer[0] = '0';
     buffer[1] = 'x';
     char_to_hex_str(data, buffer + 2);
-    UART_tx_string(buffer);
+    uart_tx_string(buffer);
 }
 
-void UART_tx_HEX_int(const int data)
+void uart_tx_HEX_int(const int data)
 {
     char buffer[2 + sizeof(int) * 2 + 1];
     buffer[0] = '0';
     buffer[1] = 'x';
     int_to_hex_str(data, buffer + 2);
-    UART_tx_string(buffer);
+    uart_tx_string(buffer);
 }
 
-void UART_tx_HEX_long(const long data)
+void uart_tx_HEX_long(const long data)
 {
     char buffer[2 + sizeof(long) * 2 + 1];
     buffer[0] = '0';
     buffer[1] = 'x';
     long_to_hex_str(data, buffer + 2);
-    UART_tx_string(buffer);
+    uart_tx_string(buffer);
 }
 
-void UART_tx_DEC_int(const uint32_t data)
+void uart_tx_DEC_int(const uint32_t data)
 {
     char buffer[sizeof(uint32_t) * 3 + 1];
     int_to_dec_str(data, buffer);
-    UART_tx_string(buffer);
+    uart_tx_string(buffer);
 }
 
-uint8_t UART_rx_byte(void)
+uint8_t uart_rx_byte(void)
 {
     // Wait for data to be received
     while (!(UCSR0A & (1 << RXC0)))
@@ -146,7 +146,7 @@ uint8_t UART_rx_byte(void)
     return UDR0;
 }
 
-void UART_enable_rx_isr(void)
+void uart_enable_rx_isr(void)
 {
     // Enable the USART Receive Complete interrupt
     UCSR0B |= _BV(RXCIE0);
