@@ -1,8 +1,7 @@
 #include "i2c.h"
+#include "delay.h"
 
 #include <util/twi.h>
-
-#include "delay.h"
 
 void i2c_init(i2c_freq_t freq)
 {

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <stdint.h>
-#include <stdbool.h>
 #include <stddef.h>
 
 #define I2C_FREQ_100K (F_CPU / 100000UL - 16) / 2
