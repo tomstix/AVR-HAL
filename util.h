@@ -84,3 +84,25 @@ void int_to_dec_str(int32_t value, char *dec)
     }
     *dec = '\0';
 }
+
+void float_to_dec_str(const float value, char *dec, const int precision)
+{
+    int32_t int_part = (int32_t)value;
+    float frac_part = value - (float)int_part;
+    int_to_dec_str(int_part, dec);
+    while (*dec != '\0')
+    {
+        dec++;
+    }
+    *dec = '.';
+    dec++;
+    for (int i = 0; i < precision; i++)
+    {
+        frac_part *= 10;
+        int_part = (int32_t)frac_part;
+        *dec = '0' + (char)int_part;
+        dec++;
+        frac_part -= (float)int_part;
+    }
+    *dec = '\0';
+}

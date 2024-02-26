@@ -145,6 +145,13 @@ void uart_tx_DEC_int(const int32_t data)
     uart_tx_string(buffer);
 }
 
+void uart_tx_DEC_float(const float data, const int precision)
+{
+    char buffer[10];
+    float_to_dec_str(data, buffer, precision);
+    uart_tx_string(buffer);
+}
+
 uint8_t uart_rx_byte(void)
 {
     // Wait for data to be received
