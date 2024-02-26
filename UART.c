@@ -111,6 +111,15 @@ void uart_tx_HEX_byte(const uint8_t data)
     uart_tx_string(buffer);
 }
 
+void uart_tx_HEX(const void *data, size_t size)
+{
+    char buffer[3 + 2 * size + 1];
+    buffer[0] = '0';
+    buffer[1] = 'x';
+    any_to_hex_str(data, size, buffer + 2);
+    uart_tx_string(buffer);
+}
+
 void uart_tx_HEX_int(const int data)
 {
     char buffer[2 + sizeof(int) * 2 + 1];

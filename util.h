@@ -1,3 +1,5 @@
+#pragma once
+
 #include <stdint.h>
 #include <stddef.h>
 
@@ -7,6 +9,25 @@ void byte_to_hex(uint8_t byte, char *hex)
     *hex = nibble < 10 ? '0' + nibble : 'A' + nibble - 10;
     nibble = byte & 0x0F;
     *(hex + 1) = nibble < 10 ? '0' + nibble : 'A' + nibble - 10;
+}
+
+void any_to_hex_str(const void *data, size_t size, char *hex)
+{
+    for (size_t i = 0; i < size; i++)
+    {
+        byte_to_hex(((const uint8_t *)data)[i], hex + 2 * i);
+    }
+    // Reverse the string because the hex is little endian
+    for (size_t i = 0; i < size / 2; i++)
+    {
+        char temp = hex[2 * i];
+        hex[2 * i] = hex[2 * size - 2 * i - 2];
+        hex[2 * size - 2 * i - 2] = temp;
+        temp = hex[2 * i + 1];
+        hex[2 * i + 1] = hex[2 * size - 2 * i - 1];
+        hex[2 * size - 2 * i - 1] = temp;
+    }
+    hex[2 * size] = '\0';
 }
 
 void char_to_hex_str(char value, char *hex)

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <stddef.h>
 
 // UART configuration, to be extended as needed
 typedef struct
@@ -37,6 +38,8 @@ void uart_tx_byte(const uint8_t data);
 void uart_tx_string(const char *data);
 
 void uart_tx_HEX_byte(const uint8_t data);
+
+void uart_tx_HEX(const void *data, size_t size);
 
 void uart_tx_HEX_int(const int data);
 
