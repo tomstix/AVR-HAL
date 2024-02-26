@@ -8,18 +8,17 @@
 // One cycle at 16MHz is 1 / 16000000 = 0.0625 us
 inline void delay_loop(uint16_t __count)
 {
-	__asm__ volatile (
-		"1: sbiw %0,1" "\n\t"
-		"brne 1b"
-		: "=w" (__count)
-		: "0" (__count)
-	);
+    __asm__ volatile(
+        "1: sbiw %0,1\n\t"
+        "brne 1b"
+        : "=w"(__count)
+        : "0"(__count));
 }
 
 // dont't use this function with us > 16384
-void delay_us(int us)
+void delay_us(uint16_t us)
 {
-    uint16_t cycles = F_CPU / (us * 4);
+    uint16_t cycles = (uint16_t)(F_CPU / (us * 4));
     delay_loop(cycles);
 }
 
