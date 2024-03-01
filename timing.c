@@ -4,11 +4,14 @@
 #include <util/atomic.h>
 #include <avr/interrupt.h>
 
+// Timer1 overflow interrupt
 ISR(TIMER1_COMPA_vect)
 {
   timer1_millis++;
 }
 
+// Initialize timer1 for the millis() function
+// Remember to enable global interrupts after calling this function
 void init_millis()
 {
   unsigned long ctc_match_overflow;
@@ -19,15 +22,14 @@ void init_millis()
   TCCR1B |= (1 << WGM12) | (1 << CS11);
 
   // high byte first, then low byte
-  OCR1AH = (ctc_match_overflow >> 8);
-  OCR1AL = ctc_match_overflow;
+  OCR1AH = ((uint8_t)ctc_match_overflow >> 8);
+  OCR1AL = (uint8_t)ctc_match_overflow;
 
   // Enable the compare match interrupt
   TIMSK1 |= (1 << OCIE1A);
-
-  //REMEMBER TO ENABLE GLOBAL INTERRUPTS AFTER THIS WITH sei(); !!!
 }
 
+// Returns the number of milliseconds since the timer was initialized
 uint32_t millis ()
 {
   uint32_t millis_return;
