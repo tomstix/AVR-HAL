@@ -1,19 +1,18 @@
 #pragma once
 
+#include <avr/io.h>
 #include <stdbool.h>
 
-#include <avr/io.h>
-
 typedef struct {
-    volatile uint8_t *port;
-    volatile uint8_t *ddr;
-    volatile uint8_t *pin;
-    uint8_t pin_number;
+  volatile uint8_t *port;
+  volatile uint8_t *ddr;
+  volatile uint8_t *pin;
+  uint8_t pin_number;
 } gpio_t;
 
 typedef enum gpio_direction {
-    GPIO_INPUT = 0,
-    GPIO_OUTPUT = 1
+  GPIO_INPUT = 0,
+  GPIO_OUTPUT = 1
 } gpio_direction_t;
 
 static const gpio_t ARDU_PIN_0 = {&PORTD, &DDRD, &PIND, PIND0};
