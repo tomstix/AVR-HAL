@@ -4,4 +4,6 @@
 
 void init_millis();
 
+uint32_t micros();
+
 uint32_t millis();

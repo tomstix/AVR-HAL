@@ -37,3 +37,12 @@ uint32_t millis() {
   ATOMIC_BLOCK(ATOMIC_FORCEON) { millis_return = timer1_millis; }
   return millis_return;
 }
+
+uint32_t micros() {
+  uint32_t ms = millis();
+  uint32_t us = TCNT1 * 4;
+  if ((TIFR1 & (1 << TOV1)) && (us < 4000)) {
+    ms++;
+  }
+  return (ms * 1000) + us;
+}
