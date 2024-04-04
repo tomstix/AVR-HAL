@@ -93,8 +93,14 @@ void uint_to_dec_str(uint32_t value, char *dec) {
 }
 
 void float_to_dec_str(const float value, char *dec, const int precision) {
-  int32_t int_part = (int32_t)value;
-  float frac_part = value - (float)int_part;
+  float tmp = value;
+  if (tmp < 0) {
+    *dec = '-';
+    dec++;
+    tmp = -tmp;
+  }
+  int32_t int_part = (int32_t)tmp;
+  float frac_part = tmp - (float)int_part;
   int_to_dec_str(int_part, dec);
   while (*dec != '\0') {
     dec++;
