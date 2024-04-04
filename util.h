@@ -71,6 +71,27 @@ void int_to_dec_str(int32_t value, char *dec) {
   *dec = '\0';
 }
 
+void uint_to_dec_str(uint32_t value, char *dec) {
+  int32_t divisor = 1000000000;
+  int32_t quotient = value;
+  int32_t remainder;
+  const char *start = dec;
+  while (divisor > 0) {
+    remainder = quotient / divisor;
+    quotient = quotient % divisor;
+    if (remainder > 0 || start != dec) {
+      *dec = '0' + (char)remainder;
+      dec++;
+    }
+    divisor /= 10;
+  }
+  if (start == dec) {
+    *dec = '0';
+    dec++;
+  }
+  *dec = '\0';
+}
+
 void float_to_dec_str(const float value, char *dec, const int precision) {
   int32_t int_part = (int32_t)value;
   float frac_part = value - (float)int_part;

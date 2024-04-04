@@ -32,7 +32,9 @@ void uart_tx_HEX_int(const int data);
 
 void uart_tx_HEX_long(const long data);
 
-void uart_tx_DEC_int(const int32_t data);
+void uart_tx_DEC_int32(const int32_t data);
+
+void uart_tx_DEC_uint32(const uint32_t data);
 
 void uart_tx_DEC_float(const float data, const int precision);
 

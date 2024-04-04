@@ -126,9 +126,15 @@ void uart_tx_HEX_long(const long data) {
   uart_tx_string(buffer);
 }
 
-void uart_tx_DEC_int(const int32_t data) {
+void uart_tx_DEC_int32(const int32_t data) {
   char buffer[sizeof(int32_t) * 3 + 1];
   int_to_dec_str(data, buffer);
+  uart_tx_string(buffer);
+}
+
+void uart_tx_DEC_uint32(const uint32_t data) {
+  char buffer[sizeof(uint32_t) * 3 + 1];
+  uint_to_dec_str(data, buffer);
   uart_tx_string(buffer);
 }
 
