@@ -4,7 +4,7 @@
 
 void spi_master_init(void) {
   DDRB |= (1 << DDB3) | (1 << DDB5) | (1 << DDB2);
-  SPCR |= (1 << MSTR) | (1 << SPE);
+  SPCR |= (1 << MSTR) | (1 << SPE) | (1 << SPR0) | (1 << CPHA);
 }
 
 void spi_master_tx_byte(const uint8_t data) {
@@ -23,6 +23,14 @@ void spi_master_tx_byte(const uint8_t data) {
 
 uint8_t spi_master_rx_byte(void) {
   SPDR = 0x00;
+  while (!(SPSR & (1 << SPIF)))
+    ;
+  return SPDR;
+}
+
+uint8_t spi_master_tx_rx_byte(const uint8_t data) {
+  SPDR = data;
+  asm volatile("nop");
   while (!(SPSR & (1 << SPIF)))
     ;
   return SPDR;
