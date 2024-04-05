@@ -15,3 +15,6 @@ void i2c_init(i2c_freq_t freq);
 i2c_err_t i2c_read_reg(uint8_t addr, uint8_t reg, uint8_t *data);
 
 i2c_err_t i2c_write_reg(uint8_t addr, uint8_t reg, uint8_t data);
+
+i2c_err_t i2c_write_multi(uint8_t addr, uint8_t reg, const uint8_t *data,
+                          size_t len);

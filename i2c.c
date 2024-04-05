@@ -2,7 +2,7 @@
 
 #include <util/twi.h>
 
-#include "delay.h"
+#include <avr/delay.h>
 
 void i2c_init(i2c_freq_t freq) {
   TWSR = 0;          // prescaler = 1
@@ -76,7 +76,7 @@ i2c_err_t i2c_read_reg(uint8_t addr, uint8_t reg, uint8_t *data) {
     return I2C_ERROR;
   }
   i2c_stop();
-  delay_us(1);
+  _delay_us(1);
 
   i2c_start();
   if (i2c_get_status() != TW_START) {
@@ -92,7 +92,7 @@ i2c_err_t i2c_read_reg(uint8_t addr, uint8_t reg, uint8_t *data) {
   }
   i2c_stop();
   *data = val;
-  delay_us(100);
+  _delay_us(100);
   return I2C_OK;
 }
 
@@ -114,6 +114,30 @@ i2c_err_t i2c_write_reg(uint8_t addr, uint8_t reg, uint8_t data) {
     return I2C_ERROR;
   }
   i2c_stop();
-  delay_us(100);
+  _delay_us(100);
+  return I2C_OK;
+}
+
+i2c_err_t i2c_write_multi(uint8_t addr, uint8_t reg, const uint8_t *data, size_t len) {
+  i2c_start();
+  if (i2c_get_status() != TW_START) {
+    return I2C_ERROR;
+  }
+  i2c_tx((uint8_t)(addr << 1));
+  if (i2c_get_status() != TW_MT_SLA_ACK) {
+    return I2C_ERROR;
+  }
+  i2c_tx(reg);
+  if (i2c_get_status() != TW_MT_DATA_ACK) {
+    return I2C_ERROR;
+  }
+  for (size_t i = 0; i < len; i++) {
+    i2c_tx(data[i]);
+    if (i2c_get_status() != TW_MT_DATA_ACK) {
+      return I2C_ERROR;
+    }
+  }
+  i2c_stop();
+  _delay_us(100);
   return I2C_OK;
 }
