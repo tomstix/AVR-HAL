@@ -3,6 +3,10 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
+#define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
+#define ABS(X) (((X) < 0) ? -(X) : (X))
+
 void byte_to_hex(uint8_t byte, char *hex);
 
 void any_to_hex_str(const void *data, size_t size, char *hex);
