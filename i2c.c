@@ -2,7 +2,7 @@
 
 #include <util/twi.h>
 
-#include <avr/delay.h>
+#include <util/delay.h>
 
 void i2c_init(i2c_freq_t freq) {
   TWSR = 0;          // prescaler = 1
