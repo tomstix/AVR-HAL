@@ -8,6 +8,10 @@ void gpio_set_dir(const gpio_t *gpio, const gpio_direction_t dir) {
   }
 }
 
+void gpio_enable_pullup(const gpio_t *gpio) {
+  *gpio->port |= (1 << gpio->pin_number);
+}
+
 void gpio_write(const gpio_t *gpio, const bool value) {
   if (value) {
     *gpio->port |= (1 << gpio->pin_number);

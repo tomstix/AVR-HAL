@@ -38,6 +38,8 @@ static const gpio_t ARDU_PIN_A5 = {&PORTC, &DDRC, &PINC, PINC5};
 
 void gpio_set_dir(const gpio_t *gpio, const gpio_direction_t dir);
 
+void gpio_enable_pullup(const gpio_t *gpio);
+
 void gpio_write(const gpio_t *gpio, const bool value);
 
 uint8_t gpio_read(const gpio_t *gpio);
