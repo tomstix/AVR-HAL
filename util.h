@@ -8,6 +8,7 @@
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 #define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
 #define ABS(X) (((X) < 0) ? -(X) : (X))
+#define CLAMP(X, MIN, MAX) (((X) < (MIN)) ? (MIN) : ((X) > (MAX)) ? (MAX) : (X))
 
 void byte_to_hex(uint8_t byte, char *hex);
 
