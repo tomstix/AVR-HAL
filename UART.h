@@ -24,6 +24,8 @@ void uart_init(const uart_config_t *config);
 
 void uart_tx_byte(const uint8_t data);
 
+void uart_tx_bytes(const uint8_t *data, size_t size);
+
 void uart_tx_string(const char *data);
 
 void uart_tx_HEX_byte(const uint8_t data);

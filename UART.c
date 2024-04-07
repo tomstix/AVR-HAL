@@ -94,6 +94,12 @@ void uart_tx_byte(const uint8_t data) {
   UDR0 = data;
 }
 
+void uart_tx_bytes(const uint8_t *data, size_t size) {
+  for (size_t i = 0; i < size; i++) {
+    uart_tx_byte(data[i]);
+  }
+}
+
 void uart_tx_string(const char *data) {
   for (int i = 0; data[i] != '\0'; i++) {
     uart_tx_byte(data[i]);
