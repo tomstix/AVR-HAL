@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 #define PI 3.14159265359
-#define PI_f 3.14159265359f
+#define PI_F 3.14159265359f
 
 #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 #define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
