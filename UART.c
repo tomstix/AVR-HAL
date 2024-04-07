@@ -31,6 +31,12 @@ void uart_init(const uart_config_t *config) {
     case UART_115200:
       UBRR0 = 8;
       break;
+    case UART_250000:
+      UBRR0 = 3;
+      break;
+    case UART_1000000:
+      UBRR0 = 1;
+      break;
   }
 
   // Set data bits
